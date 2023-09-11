@@ -27,3 +27,5 @@ function displayAuthor(string $authorEmail, array $users) : string {
     return ''; 
 }
 ?>
+
+<?php include_once('footer.php'); ?>

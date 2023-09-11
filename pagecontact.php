@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Contactez-nous</title>
-    <!-- Inclure les autres balises meta, les styles CSS, etc. ici si nécessaire -->
+    
 </head>
 <body>
     <h1>Contactez-nous</h1>
@@ -20,3 +20,5 @@
     </form>
 </body>
 </html>
+
+<?php include_once('footer.php'); ?>
