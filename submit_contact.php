@@ -28,8 +28,8 @@
         
         <?php
             if (
-                (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-                || (!isset($_POST['message']) || empty($_POST['message']))
+                (!isset($_GET['email']) || !isset($_GET['message']))
+                
                 )
             {
                 echo('<h1>Il faut un email et un message valides pour soumettre le formulaire.</h1>');
