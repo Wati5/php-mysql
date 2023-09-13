@@ -43,6 +43,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 <!-- Si utilisateur/trice bien connectée, on affiche un message de succès -->
 <?php else: ?>
     <div class="alert alert-success" role="alert">
-        Bonjour <?php echo $loggedUser['email']; ?> et bienvenue sur le site !
+        Bonjour et bienvenue sur le site  <?php echo $_SESSION['loggedUser']; ?>
     </div>
 <?php endif; ?>
