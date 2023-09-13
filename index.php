@@ -1,6 +1,7 @@
 <!-- index.php -->
 <?php
 session_start(); // Démarrer la session
+session_regenerate_id(true);
 include_once('header.php');
 include_once('variables.php');
 include_once('functions.php');
@@ -29,13 +30,17 @@ include_once('login.php'); // Inclure le fichier de connexion
             include_once('variables.php');
             include_once('functions.php');
         ?>
+        
+
 
         <!-- inclusion de l'entête du site -->
         <?php include_once('login.php'); ?>
         <!-- Ne pas inclure l'entête ici car elle est déjà incluse dans le header.php -->
 
     <?php if(isset($_SESSION['loggedUser'])): // Vérifier si l'utilisateur est connecté ?>
-        <?php foreach(getrecipes($recipes, $limit) as $recipe) : ?>
+        
+
+        <?php foreach(getrecipes($recipes, $limit =10) as $recipe) : ?>
             <article>
                 <h3><?php echo $recipe['title']; ?></h3>
                 <div><?php echo $recipe['recipe']; ?></div>
@@ -45,6 +50,13 @@ include_once('login.php'); // Inclure le fichier de connexion
     <?php endif; ?>
 
     </div>
+    <?php 
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header('Location: index.php'); // Redirigez l'utilisateur vers la page d'accueil après la déconnexion
+        exit;
+    }
+    ?>
 
     <!-- inclusion du bas de page du site -->
     <?php include_once('footer.php'); ?>

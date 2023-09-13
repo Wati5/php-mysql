@@ -1,5 +1,5 @@
 <?php
-session_start(); // Démarrer la session
+    
     include_once('variables.php');
 
 // Validation du formulaire
