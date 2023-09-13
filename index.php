@@ -1,5 +1,11 @@
 <!-- index.php -->
-<?php session_start();// $_SESSION ?>
+<?php
+session_start(); // Démarrer la session
+include_once('header.php');
+include_once('variables.php');
+include_once('functions.php');
+include_once('login.php'); // Inclure le fichier de connexion
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +34,7 @@
         <?php include_once('login.php'); ?>
         <!-- Ne pas inclure l'entête ici car elle est déjà incluse dans le header.php -->
 
-    <?php if(isset($loggedUser)): ?>
+    <?php if(isset($_SESSION['loggedUser'])): // Vérifier si l'utilisateur est connecté ?>
         <?php foreach(getrecipes($recipes, $limit) as $recipe) : ?>
             <article>
                 <h3><?php echo $recipe['title']; ?></h3>
