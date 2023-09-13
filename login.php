@@ -5,17 +5,20 @@
 if (isset($_POST['email']) && isset($_POST['password'])) {
     foreach ($users as $user) {
         if ($_POST['email'] === $user['email'] && $_POST['password'] === $user['password']) {
-            $loggedUser = ['email' => $user['email']];
+            $_SESSION['loggedUser'] = $user['email'];
             break; // Sortir de la boucle dès qu'un utilisateur correspondant est trouvé.
-        } else {
-            $errorMessage = 'Les informations envoyées ne permettent pas de vous identifier.';
+        } 
+        
+        else {
+            $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s', $_POST['email'], $_POST['password']);
         }
+        
     }
 }
 ?>
 
 <!-- Si l'utilisateur/trice est non identifié(e), on affiche le formulaire -->
-<?php if (!isset($loggedUser)) : ?>
+<?php if (!isset($_SESSION['loggedUser'])) : ?>
     <form action="login.php" method="post">
         <!-- si message d'erreur on l'affiche -->
         <?php if (isset($errorMessage)) : ?>
