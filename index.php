@@ -24,7 +24,7 @@
         ?>
 
         <!-- inclusion de l'entête du site -->
-        <?php include_once('header.php'); ?>
+        <!-- Ne pas inclure l'entête ici car elle est déjà incluse dans le header.php -->
         
         <?php foreach(getRecipes($recipes) as $recipe) : ?>
             <article>

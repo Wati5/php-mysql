@@ -37,6 +37,7 @@
         <br />
     </div>
 
+    <!-- inclusion du bas de page du site -->
     <?php include_once('footer.php'); ?>
 </body>
 </html>
