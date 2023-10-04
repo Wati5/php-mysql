@@ -1,25 +1,9 @@
-<!-- index.php -->
 <?php
 session_start(); // Démarrer la session
+session_regenerate_id(true);
 
-
-// ... Autres inclusions et code ...
-
-if(isset($_SESSION['loggedUser'])) {
-   
-    $inactive = 5; 
-
-    if (isset($_SESSION['timeout'])) {
-        $session_life = time() - $_SESSION['timeout'];
-
-        if ($session_life > $inactive) {
-            session_destroy(); 
-            header("Location: login.php"); 
-        }
-    }
-
-    $_SESSION['timeout'] = time(); // Mettre à jour le timestamp de dernière activité
-}
+// Inclure le script mysql.php pour activer les messages d'erreur
+include_once('mysql.php');
 
 include_once('header.php');
 include_once('variables.php');
@@ -46,7 +30,8 @@ include_once('login.php'); // Inclure le fichier de connexion
 
         <!-- inclusion des variables et fonctions -->
         <?php
-            include_once('variables.php');
+            // Retirez cette inclusion des variables.php car vous obtiendrez les recettes directement depuis la base de données
+            // include_once('variables.php');
             include_once('functions.php');
         ?>
         
@@ -59,7 +44,15 @@ include_once('login.php'); // Inclure le fichier de connexion
     <?php if(isset($_SESSION['loggedUser'])): // Vérifier si l'utilisateur est connecté ?>
         
 
-        <?php foreach(getrecipes($recipes, $limit =10) as $recipe) : ?>
+        <?php 
+        // Placez la requête SQL pour récupérer les recettes ici
+        $sqlQuery = 'SELECT * FROM recipes';
+        $recipesStatement = $db->prepare($sqlQuery);
+        $recipesStatement->execute();
+        $recipes = $recipesStatement->fetchAll();
+        ?>
+
+        <?php foreach($recipes as $recipe) : ?>
             <article>
                 <h3><?php echo $recipe['title']; ?></h3>
                 <div><?php echo $recipe['recipe']; ?></div>
